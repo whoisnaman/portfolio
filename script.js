@@ -38,6 +38,31 @@ function updateClock() {
     }
 }
 
-// Initialise clock and set interval to update every second
 updateClock();
 setInterval(updateClock, 1000);
+
+// Dynamic Sidebar Navigation Logic
+const sections = document.querySelectorAll('.portfolio-section');
+const navLinks = document.querySelectorAll('#sidebar nav ul li a');
+
+const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -80% 0px', 
+    threshold: 0
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav');
+                
+                if (link.getAttribute('href').substring(1) === entry.target.id) {
+                    link.classList.add('active-nav');
+                }
+            });
+        }
+    });
+}, observerOptions);
+
+sections.forEach(section => observer.observe(section));
