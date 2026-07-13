@@ -178,3 +178,49 @@ button:hover {
         margin: 0 0.75rem;
     }
 }
+/* New Section Utilities */
+.portfolio-section {
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-colour);
+}
+
+.portfolio-section:last-child {
+    border-bottom: none;
+}
+
+.portfolio-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: -1px;
+}
+
+.timeline-item, .education-item, .case-study-card {
+    margin-bottom: 2rem;
+}
+
+.timeline-item h2, .education-item h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.case-study-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border-colour);
+    transition: background-color 0.2s ease;
+}
+
+.case-study-card:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border-colour);
+}
