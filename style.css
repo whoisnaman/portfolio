@@ -60,7 +60,7 @@ button:hover {
 }
 
 button:active {
-    outline: 1px dotted var(--bg-colour);
+    outline: 1px solid var(--bg-colour);
     outline-offset: -3px;
 }
 
@@ -108,15 +108,15 @@ button:active {
 }
 
 #sidebar a:active {
-    outline: 1px dotted var(--bg-colour);
+    outline: 1px solid var(--bg-colour);
     outline-offset: -3px;
 }
 
-/* Active Navigation State - Thin dashed border */
+/* Active Navigation State - Solid border */
 #sidebar a.active-nav {
     background-color: transparent;
     color: var(--text-colour); 
-    border: 1px dashed var(--text-colour); 
+    border: 1px solid var(--text-colour); 
 }
 
 /* Main Content - Centred block, equal padding, left-aligned text */
