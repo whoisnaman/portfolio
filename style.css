@@ -3,19 +3,20 @@
     --bg-colour: #FFFFFF;
     --text-colour: #000000;
     --border-colour: #000000;
+    --active-bg: #E0E0E0; /* Light grey for active state */
 }
 
 [data-theme="dark"] {
     --bg-colour: #000000;
     --text-colour: #FFFFFF;
     --border-colour: #FFFFFF;
+    --active-bg: #333333; /* Dark grey for active state */
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Clean system fonts for a raw, unthemed document look */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -25,17 +26,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* ZERO transition properties. State changes are binary and instant. */
 }
 
-/* Header */
+/* Header - Thickened and height-locked */
 #main-header {
     position: sticky;
     top: 0;
+    height: 70px; /* Fixed height to anchor the sidebar calculation */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0 2rem;
     border-bottom: 1px solid var(--border-colour);
     background-color: var(--bg-colour);
     z-index: 100;
@@ -46,9 +47,9 @@ button {
     background: none;
     border: 1px solid var(--border-colour);
     color: var(--text-colour);
-    padding: 0.25rem 0.75rem;
+    padding: 0.35rem 1rem;
     cursor: pointer;
-    font-family: monospace; /* Anchors the OS aesthetic */
+    font-family: monospace;
     text-transform: uppercase;
     font-size: 0.85rem;
 }
@@ -71,16 +72,18 @@ button:active {
 .layout-wrapper {
     display: flex;
     flex: 1;
+    width: 100%;
 }
 
-/* Sidebar (File Directory Style) */
+/* Sidebar - Rigid calculation stops border scrolling glitch */
 #sidebar {
     width: 250px;
+    flex-shrink: 0;
     border-right: 1px solid var(--border-colour);
-    padding: 1.5rem 1rem;
+    padding: 2rem 1rem;
     position: sticky;
-    top: 45px; /* Adjusts to header height */
-    height: calc(100vh - 45px - 40px);
+    top: 70px; /* Exact match to header height */
+    height: calc(100vh - 130px); /* 100vh minus header(70) and footer(60) */
     overflow-y: auto;
 }
 
@@ -109,11 +112,19 @@ button:active {
     outline-offset: -3px;
 }
 
-/* Main Content */
+/* Active Navigation State */
+#sidebar a.active-nav {
+    background-color: var(--active-bg);
+    color: var(--text-colour); /* Remains original text colour so it doesn't look like a hover state */
+}
+
+/* Main Content - Centred block, equal padding, left-aligned text */
 #main-content {
     flex: 1;
-    padding: 3rem 2rem;
-    max-width: 800px;
+    max-width: 850px;
+    margin: 0 auto; /* Forces the block to the centre of the remaining viewport */
+    padding: 4rem 3rem; 
+    text-align: left;
 }
 
 /* Structural Sections */
@@ -130,7 +141,7 @@ button:active {
 .portfolio-section h1 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    font-weight: normal; /* Classic document title formatting */
+    font-weight: normal;
 }
 
 .portfolio-section h2 {
@@ -147,7 +158,7 @@ button:active {
 
 .portfolio-section p {
     margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* Case Study & Grid Elements */
@@ -156,7 +167,7 @@ button:active {
 }
 
 .case-study-card {
-    padding: 1rem;
+    padding: 1.5rem;
     border: 1px solid var(--border-colour);
 }
 
@@ -172,7 +183,7 @@ button:active {
 }
 
 .skill-card {
-    padding: 1rem;
+    padding: 1.25rem;
     border: 1px solid var(--border-colour);
 }
 
@@ -181,14 +192,15 @@ button:active {
     color: var(--bg-colour);
 }
 
-/* Sticky Footer */
+/* Sticky Footer - Thickened and height-locked */
 #main-footer {
     position: sticky;
     bottom: 0;
+    height: 60px; /* Fixed height to anchor the sidebar calculation */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1.5rem;
+    padding: 0 2rem;
     border-top: 1px solid var(--border-colour);
     background-color: var(--bg-colour);
     z-index: 100;
@@ -210,7 +222,8 @@ button:active {
 /* Mobile Responsiveness Strategy */
 @media (max-width: 768px) {
     #main-header {
-        padding: 0.75rem 1rem;
+        height: auto;
+        padding: 1rem;
     }
 
     #mobile-menu-toggle {
@@ -222,7 +235,7 @@ button:active {
         display: none;
         position: fixed;
         left: 0;
-        top: 45px;
+        top: 60px;
         width: 100%;
         height: auto;
         border-right: none;
@@ -236,11 +249,13 @@ button:active {
     }
 
     #main-content {
-        padding: 2rem 1rem;
+        padding: 3rem 1.5rem;
     }
 
     #main-footer {
-        position: static; /* Yields screen real estate on mobile devices */
+        position: static;
+        height: auto;
+        padding: 1rem;
         flex-direction: column;
         gap: 0.75rem;
         text-align: center;
